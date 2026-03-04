@@ -1,0 +1,89 @@
+/* =========================================
+   3. БАЗОВІ СТИЛІ (ЗАСТОСУВАННЯ ЗМІННИХ)
+========================================= */
+body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased; /* Робить шрифти тоншими і чіткішими на Mac */
+}
+
+/* Контейнер, який тримає контент по центру і не дає йому розтягуватися на супер-широких екранах */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Налаштування заголовків */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--step-4);
+  margin-bottom: 2.5rem;
+}
+h2 {
+  font-size: var(--step-3);
+  margin-bottom: 2rem;
+}
+h3 {
+  font-size: var(--step-2);
+  margin-bottom: 1rem;
+}
+h4 {
+  font-size: var(--step-1);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Зображення ніколи не вилазять за межі блоку */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================
+   4. БАЗОВІ ЕЛЕМЕНТИ (КНОПКИ, ПОСИЛАННЯ)
+========================================= */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-family: var(--font-main);
+  font-weight: 600;
+  min-width: 140px;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.btn:hover {
+  background-color: var(--color-accent-hover);
+}
