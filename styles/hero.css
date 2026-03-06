@@ -29,7 +29,7 @@
 
 /* МАГІЯ: Збільшуємо логотип, коли відкривається мобільне меню */
 /* Наш JS додає body клас no-scroll, ми за нього чіпляємось */
-body.no-scroll .logo-img {
+body.no-scroll .logo-img-large {
   transform: scale(1.2); /* Збільшуємо лого ще на 20% на темному фоні */
 }
 
@@ -318,4 +318,79 @@ body.no-scroll {
     font-size: var(--step-4);
     letter-spacing: 2px;
   }
+}
+
+/* Оверлей меню */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #3d3935; /* Твій темний колір */
+  z-index: 2000;
+  display: none; /* Сховано за замовчуванням */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Коли меню активне */
+.mobile-menu-overlay.is-open {
+  display: block;
+  opacity: 1;
+}
+
+/* Контейнер для центрування */
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Лого вгорі, посилання в центрі, кнопка внизу */
+  align-items: center;
+  height: 100%;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.mobile-menu-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-size: var(--step-0);
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  font-family: var(--font-main); /* Твій шрифт для заголовків */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color var(--transition-speed) ease;
+}
+.mobile-nav-link:hover {
+  color: var(--color-accent-light);
+  font-size: 1.2rem;
+}
+
+.mobile-cta-btn {
+  width: 280px;
+  display: block;
+}
+
+/* Кнопка Х */
+.menu-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3rem;
+  background: none;
+  border: none;
+  color: var(--color-accent); /* Твій золотий колір */
+  cursor: pointer;
 }
