@@ -9,3 +9,10 @@
 @import url('./base.css'); /* Потім базові стилі */
 @import url('./components.css'); /* Потім компоненти */
 @import url('./hero.css'); /* Потім стилі для головного екрану */
+@import url('./geo.css'); /* Потім стилі для географії */
+@import url('./portfolio.css'); /* Потім стилі для портфоліо */
+@import url('./manufacture.css'); /* Потім стилі для виробництва */
+@import url('./process.css'); /* Потім стилі для процесу */
+@import url('./contacts.css'); /* І в кінці стилі для контакту */
+@import url('./whatsapp.css'); /* Плаваюча кнопка для WhatsApp */
+@import url('./footer.css'); /* І в кінці стилі для футера */

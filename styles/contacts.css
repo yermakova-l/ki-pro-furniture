@@ -1,0 +1,95 @@
+/* =========================================
+   МОДУЛЬ: КОНТАКТИ (CONTACT SECTION)
+========================================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Мобільна версія: 1 колонка */
+  gap: 4rem;
+}
+
+/* --- Ліва частина: Текст та іконки --- */
+.contact-desc {
+  color: rgba(255, 255, 255, 0.8); /* Злегка приглушений білий текст */
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent); /* Всі іконки автоматично стають золотими */
+  flex-shrink: 0;
+}
+
+/* --- Права частина: Форма --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  /* Ефект "Скла": напівпрозорий білий фон на темному дереві */
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Дуже тонка світла рамка */
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background-color: transparent; /* Поля прозорі */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Рамка полів */
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Магія фокусу: коли користувач вводить текст */
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent); /* Рамка стає золотою */
+  background-color: rgba(255, 255, 255, 0.05); /* Поле ледь-ледь світлішає */
+}
+
+.form-textarea {
+  resize: vertical; /* Дозволяє розтягувати поле тільки вниз, не ламаючи дизайн */
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%; /* Кнопка на всю ширину форми */
+  margin-top: 1rem;
+  color: black;
+}
+
+/* --- @media ДЛЯ ДЕСКТОПУ --- */
+@media screen and (min-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr; /* Робимо 2 ідеально рівні колонки */
+    align-items: center; /* Центруємо форму відносно тексту зліва */
+  }
+
+  .contact-form {
+    padding: 3rem; /* Трохи більше "повітря" всередині форми на ПК */
+  }
+}

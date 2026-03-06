@@ -7,3 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ініціалізація мобільного меню
   initMobileMenu();
 });
+/* =========================================
+   Filtered Galleryfunctionality
+========================================= */
+
+import { initGallery } from './modules/filter-gallery.js';
+initGallery();

@@ -11,30 +11,35 @@
   /* Текст: не чисто чорний, а колір дуже темного дерева або вугілля */
   --color-text-main: #2c2825;
   --color-text-muted: #5c554d;
+  --color-text-section-title: #383838; /* Темний, але теплий для заголовків секцій */
 
   /* Акценти: Золото / Бронза (для кнопок та іконок) */
   --color-accent: #b8860b; /* Dark Goldenrod */
   --color-accent-hover: #997009;
-  --color-accent-light: #d4af37; /* Класичне яскраве золото (Metallic Gold)
+  --color-accent-light: #d4af37;
+  --color-accent-light-hover: #635d58; /* Світліший акцент для кнопок при наведенні */
 
   /* Темне дерево (для футера або темних секцій) */
   /*--color-dark-wood: #2b1e16;*/
-  --color-dark-wood: #302128;
+  /*--color-dark-wood: #302128;*/
+  --color-dark-wood: #282827; /* Ще темніше, але не чорне, щоб зберегти теплоту */
+  --color-wood-light: #514c48; /* Трохи світліше, щоб не було надто важко */
 
   /* --- ШРИФТИ --- */
   --font-heading: 'Playfair Display', serif; /* Для преміальних заголовків */
   --font-main: 'Inter', sans-serif; /* Для читабельного тексту */
+  --font-hero-heading: 'Gravitas One', sans-serif; /* Для головного екрану - сучасний і стильний */
 
   /* --- ТИПОГРАФІКА --- */
   --step-0: 1rem; /* 16px */
   --step-1: 1.125rem; /* 18px */
   --step-2: 1.5rem; /* 24px */
-  --step-3: 2.25rem; /* 36px (h2) */
-  --step-4: 3.5rem; /* 56px (h1 - Головний екран) */
+  --step-3: 2rem; /* 32px (h2) */
+  --step-4: 3rem; /* 48px (h1 - Головний екран) */
 
   /* --- ІНШЕ --- */
-  --border-radius: 4px; /* Маленьке заокруглення для елегантності */
-  --transition-speed: 0.3s;
+  --border-radius: 5px; /* Маленьке заокруглення для елегантності */
+  --transition-speed: 0.5s;
   --container-width: 1200px; /* Максимальна ширина контенту */
 
   --header-height: 90px;

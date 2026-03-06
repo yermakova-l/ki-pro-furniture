@@ -1,0 +1,171 @@
+/* =========================================
+   МОДУЛЬ: ФУТЕР (FOOTER)
+========================================= */
+.site-footer {
+  background-color: var(--color-dark-wood);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 4rem 0 2rem 0; /* Зверху відступ більший, знизу менший */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ледь помітна лінія відділення від попередньої секції */
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 колонка на мобільному */
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* --- Стовпчик 1 --- */
+.footer-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-contacts li {
+  display: flex;
+  flex-direction: column; /* На мобільному лебел над контактом */
+  font-size: 0.95rem;
+}
+
+.contact-label {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+.footer-contacts a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.footer-contacts a:hover {
+  color: var(--color-accent);
+}
+
+/* --- Стовпчик 2 --- */
+.footer-heading {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-address {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Квадратні іконки соцмереж */
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.social-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px; /* Легке заокруглення кутів, щоб не було занадто гостро */
+  color: var(--color-accent); /* Іконка золота */
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.social-square svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Ефект заливки при наведенні */
+.social-square:hover {
+  background-color: var(--color-accent);
+  color: var(--color-dark-wood); /* Іконка стає темною на золотому фоні */
+  transform: translateY(-3px); /* Ледь піднімається */
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* --- Копірайт --- */
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- @media ДЛЯ ДЕСКТОПУ --- */
+@media screen and (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2 колонки */
+    gap: 4rem;
+  }
+
+  .footer-contacts li {
+    flex-direction: row; /* На ПК лейбел і контакт в один рядок */
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-label {
+    margin-bottom: 0;
+    width: 100px; /* Фіксуємо ширину лейблів, щоб текст стояв рівно в стовпчик */
+    flex-shrink: 0;
+  }
+}
+
+/* --- GDPR Документи --- */
+.footer-legal {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.footer-legal a:hover {
+  color: var(--color-accent);
+}
+
+.footer-legal .divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Окрема секція Копірайту --- */
+.footer-copyright {
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  /* Робимо фон трішки темнішим за основний футер, щоб візуально відокремити блок */
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-copyright p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
