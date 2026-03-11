@@ -1,0 +1,248 @@
+#reviews {
+  padding-top: 6rem;
+  margin-bottom: 6rem;
+}
+#reviews .section-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+/* --- Загальні стилі для контейнера та треку --- */
+.testimonials-wrapper {
+  position: relative; /* Необхідно для позиціонування стрілочок */
+  overflow: hidden; /* Ховаємо скролбар */
+  padding: 0 20px; /* Місце для стрілочок з боків */
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 20px;
+  /*transition: transform 0.3s ease; /* Для плавної прокрутки */
+  /* Ці властивості необхідні, якщо прокрутка буде робитись через JS */
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+}
+.testimonials-track::-webkit-scrollbar {
+  display: none; /* Ховаємо скролбар для Chrome/Safari */
+}
+
+.testimonial-card {
+  flex: 0 0 100%; /* Мобільна версія */
+  /* scroll-snap-align: start; */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+@media (min-width: 992px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 14px); /* Три на десктопі */
+  }
+}
+
+/* --- 3. ЗМІНА: Значок YouTube вліво і вниз --- */
+.project-media {
+  position: relative;
+  height: 200px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden; /* Щоб анімація пульсації не виходила за межі */
+}
+
+.video-play-btn {
+  position: absolute;
+  /* Значок YouTube: вліво і вниз */
+  right: 35px;
+  bottom: 25px; /* Залиште трохи відступу, якщо хочете бачити його на фото */
+  z-index: 100;
+
+  /* АБО, щоб половина була на фото, половина - нижче, треба змінити структуру HTML і CSS */
+  /* bottom: -20px;
+  z-index: 10;
+  overflow: visible !important; */
+
+  width: 50px;
+  height: 50px;
+  background-color: #ff4800;
+  border-radius: 50%; /* Робимо його круглим */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  /* Анімація пульсації */
+  animation: youtube-pulse 2s infinite;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
+}
+
+.video-play-btn::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 14px; /* Трохи менший трикутник */
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 3px;
+}
+
+/* Ефект пульсації для круглої кнопки */
+@keyframes youtube-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 0, 0, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    transform: scale(1);
+  }
+}
+
+/* --- 1 & 2 ЗМІНИ: Товсті круглі жовті лапки, збільшений відступ --- */
+.testimonial-content {
+  padding: 30px 25px 25px; /* Збільшений відступ зверху */
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+}
+
+.review-text {
+  position: relative;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  margin-top: 15px; /* Збільшений відступ знизу від лапок */
+}
+
+/* Товсті, круглі жовті лапки */
+.review-text::before {
+  content: '“';
+  font-family: var(--font-hero-heading); /* Цей шрифт дає гарні круглі лапки */
+  font-weight: bold; /* Товсті */
+  font-size: 8rem;
+  color: #ca9d09; /* Акцентний жовтий колір */
+  line-height: 1;
+  position: absolute;
+  top: -60px; /* Вище тексту */
+  left: -5px;
+  display: block;
+}
+
+.client-info h4 {
+  margin: 0;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.project-location {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* --- 4. ЗМІНА: Стрілочки прокручування на десктопі --- */
+
+/* Ховаємо стрілочки на мобільних пристроях */
+@media (max-width: 991px) {
+  .nav-btn {
+    display: none;
+  }
+}
+
+/* --- ДЕКСТОП: 3 картки в ряд --- */
+@media (min-width: 992px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 14px); /* По 3 в ряд */
+  }
+}
+
+/* Модальне вікно має бути ПОВЕРХ усього */
+.modal {
+  display: none;
+  position: fixed; /* Обов'язково fixed */
+  z-index: 9999; /* Максимальний пріоритет */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center; /* Центрування по вертикалі */
+  justify-content: center; /* Центрування по горизонталі */
+}
+
+/* Коли модалка відкрита, показуємо її як flex */
+.modal.active {
+  display: flex !important;
+}
+
+/* Стрілки прокрутки */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer !important;
+  z-index: 100 !important;
+  border: none;
+  font-size: 1.2rem;
+  color: #333;
+  pointer-events: auto !important; /* Дозволяємо кліки */
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px; /* Збільшуємо ширину відео */
+  background: #000;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* Співвідношення 16:9 */
+  height: 0;
+  background: #000;
+}
+/* Спеціальний клас для вертикального відео (9:16) */
+.video-container.vertical {
+  padding-bottom: 177.77%; /* Формат 9:16 для мобільного */
+  max-width: 400px; /* Обмежуємо ширину, щоб не було занадто великим на десктопі */
+  margin: 0 auto;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.close-modal {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}

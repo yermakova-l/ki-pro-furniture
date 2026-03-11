@@ -3,16 +3,1427 @@
 ========================================= */
 
 /* 1. Імпорт модулів (порядок має значення!) */
-@import url('./fonts.css'); /* Спочатку шрифти */
-@import url('./reset.css'); /* Потім скидання стилів */
+
 @import url('./variables.css'); /* Потім змінні */
 @import url('./base.css'); /* Потім базові стилі */
 @import url('./components.css'); /* Потім компоненти */
-@import url('./hero.css'); /* Потім стилі для головного екрану */
-@import url('./geo.css'); /* Потім стилі для географії */
-@import url('./portfolio.css'); /* Потім стилі для портфоліо */
-@import url('./manufacture.css'); /* Потім стилі для виробництва */
-@import url('./process.css'); /* Потім стилі для процесу */
-@import url('./contacts.css'); /* І в кінці стилі для контакту */
+@import url('./review.css'); /* Потім відгуки */
 @import url('./whatsapp.css'); /* Плаваюча кнопка для WhatsApp */
-@import url('./footer.css'); /* І в кінці стилі для футера */
+
+/* =========================================
+   1. FONTS (fonts.css)
+========================================= */
+
+/* latin */
+@font-face {
+  font-family: 'Gravitas One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/gravitasone400_latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================
+   2. STYLES RESET (reset.css)
+========================================= */
+
+/* Робимо так, щоб padding і border не збільшували розмір елементів */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Прибираємо стандартні відступи */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Плавна прокрутка для якорів на лендінгах */
+html {
+  scroll-behavior: smooth;
+}
+
+/*=======================================
+  HERO MODULE (hero.css)
+========================================= */
+
+/* =========================================
+   ЛОГОТИП ТА АНІМАЦІЇ
+========================================= */
+.logo-img-large {
+  width: 150px; /* Великий розмір для мобільних */
+  height: auto;
+  margin-bottom: 1rem;
+}
+/* Анімація плавної появи логотипа при завантаженні сторінки */
+.logo-link {
+  display: inline-block;
+  animation: fade-in-scale 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* МАГІЯ: Збільшуємо логотип, коли відкривається мобільне меню */
+/* Наш JS додає body клас no-scroll, ми за нього чіпляємось */
+body.no-scroll .logo-img-large {
+  transform: scale(1.2); /* Збільшуємо лого ще на 20% на темному фоні */
+}
+
+/* --- КНОПКА ГАМБУРГЕР --- */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 32px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101; /* Кнопка завжди поверх меню */
+  padding: 0;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-accent-light);
+  transition: all var(--transition-speed) ease;
+}
+
+.hamburger.is-active .hamburger-line {
+  background-color: var(--color-accent-light);
+}
+
+/* Анімація перетворення на хрестик */
+.hamburger.is-active .hamburger-line:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+  color: var(--color-accent-light);
+}
+.hamburger.is-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-active .hamburger-line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+  color: var(--color-accent-light);
+}
+
+/* --- МОБІЛЬНЕ МЕНЮ (За замовчуванням приховане за правим краєм) --- */
+.main-nav {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Ховаємо за межами екрану */
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-wood-light); /* Темне преміальне дерево */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.4s ease-in-out;
+  z-index: 100;
+}
+
+/* Клас, який додаватиме JS для відкриття меню */
+.main-nav.is-open {
+  right: 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 3rem 0;
+}
+
+.nav-link {
+  color: #ffffff;
+  font-size: var(--step-2); /* Великий шрифт на телефонах */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-family: var(--font-heading); /* Можемо використати шрифт із зарубками для меню */
+}
+
+/* Клас для body, щоб сторінка не прокручувалась, коли меню відкрите */
+body.no-scroll {
+  overflow: hidden;
+}
+/* ОНОВЛЕНА КНОПКА CONTACT US У МЕНЮ */
+/* Щоб текст ідеально читався, робимо його білим, але даємо золоту рамку */
+.main-nav .btn-outline {
+  color: #ffffff;
+  border: 2px solid var(--color-accent);
+  padding: 0.8rem 2.5rem;
+  margin-top: 1rem;
+  font-size: var(--step-0);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed);
+}
+.main-nav .btn-outline:hover {
+  background-color: var(--color-accent-light);
+  color: var(--color-dark-wood); /* При натисканні кнопка стає золотою, а текст темним */
+}
+
+/* =========================================
+   DESKTOP СТИЛІ (Екрани від 992px)
+========================================= */
+@media screen and (min-width: 992px) {
+  .logo-img {
+    height: 80px;
+  }
+  /* На десктопі меню не перекриває екран, тому відключаємо збільшення від no-scroll */
+  body.no-scroll .logo-img {
+    transform: scale(1);
+  }
+
+  /* Зате додаємо ефект збільшення при наведенні мишкою! */
+  .logo-link:hover .logo-img {
+    transform: scale(1.05);
+  }
+
+  /* Ховаємо гамбургер на десктопі */
+  .hamburger {
+    display: none;
+  }
+
+  /* Перебудовуємо меню з вертикального (мобільного) на горизонтальне (десктопне) */
+  .main-nav {
+    position: static;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 2.5rem;
+    margin-bottom: 0;
+    margin-right: 3rem;
+  }
+
+  .nav-link {
+    color: #ffffff; /* Пункти меню завжди білі поверх темного фону/фото */
+    font-size: var(--step-0);
+    font-family: var(--font-main);
+    letter-spacing: 1px;
+    transition: color var(--transition-speed) ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent);
+  }
+}
+
+/* =========================================
+   БЛОК 1: HERO SECTION (MOBILE FIRST)
+========================================= */
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-wood-light);
+}
+
+.hero-text-side {
+  display: flex;
+  flex-direction: column; /* Головне правило: все в стовпчик! */
+  gap: 2rem; /* Відстань між нашими 4-ма блоками на мобільному */
+  padding: 2rem 20px 4rem 20px;
+}
+
+/* 1. Блок Меню */
+.hero-block-menu {
+  display: flex;
+  justify-content: flex-end; /* Гамбургер притискаємо вправо на телефоні */
+  width: 100%;
+}
+
+/* 2. Блок Логотипа */
+.logo-img-large {
+  width: 160px; /* Великий логотип для телефону */
+  height: auto;
+  /* filter: invert(1) contrast(1.2);
+  mix-blend-mode: screen;*/
+}
+.hero-block-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Відстань між заголовком і підзаголовком */
+  max-width: 500px; /* Щоб текст не розтягувався на всю ширину телефону */
+}
+/* 3. Блок Тексту */
+.hero-title {
+  color: #ffffff;
+  font-family: var(--font-hero-heading);
+  font-size: var(--step-3);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  color: #f0f0f0;
+  font-size: var(--step-1);
+  font-weight: 300;
+}
+
+/* 4. Блок Кнопок */
+.hero-block-buttons {
+  display: flex;
+  flex-direction: column;
+  max-width: 240px;
+}
+
+.hero-image-side {
+  min-height: 600px;
+  background-image: url('../images/hero.jpeg'); /* Твоє фото команди */
+  background-size: cover;
+  background-position: center;
+}
+
+/* =========================================
+   Tablet or notebook (від 768px до 991px)
+========================================= */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-text-side {
+    padding: 2rem 40px 2rem 5rem; /* Більше відступів для планшетів */
+    gap: 1.5rem; /* Трохи більше простору між блоками */
+  }
+}
+
+/* =========================================
+   ДЕСКТОП (Від 992px)
+========================================= */
+@media screen and (min-width: 992px) {
+  .hero {
+    flex-direction: row; /* Розставляємо ліву і праву половини екрану */
+  }
+
+  .hero-text-side {
+    width: 50%; /* Ліва половина */
+    padding: 4rem 4rem 4rem 10%; /* Гарні відступи зліва і зверху */
+    justify-content: center; /* Центруємо весь стовпчик по вертикалі */
+    align-items: flex-start; /* Вирівнюємо ВСІ 4 блоки строго по лівому краю */
+    gap: 3.5rem; /* Велика красива відстань між Меню -> Лого -> Текстом -> Кнопками */
+  }
+
+  .hero-image-side {
+    width: 50%; /* Права половина */
+    min-height: 100vh;
+  }
+
+  /* --- Налаштування Меню для Десктопу --- */
+  .hero-block-menu {
+    justify-content: flex-start; /* Притискаємо меню вліво */
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 2.5rem;
+    margin: 0;
+  }
+
+  .nav-link {
+    font-size: 0.9rem; /* Робимо букви меню меншими, щоб логотип домінував */
+    color: #ffffff; /* Пункти меню завжди білі поверх темного фону/фото */
+    transition: color var(--transition-speed);
+  }
+
+  .nav-link:hover {
+    color: var(--color-accent-light);
+  }
+
+  /* --- Налаштування Логотипу для Десктопу --- */
+  .logo-img-large {
+    width: 250px; /* Величезний, преміальний логотип! */
+  }
+
+  /* --- Налаштування Кнопок для Десктопу --- */
+  .hero-block-buttons {
+    flex-direction: row; /* Якщо буде дві кнопки, стануть в рядок */
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .hero-title {
+    font-size: var(--step-4);
+    letter-spacing: 2px;
+  }
+}
+
+/* Оверлей меню */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #3d3935; /* Твій темний колір */
+  z-index: 2000;
+  display: none; /* Сховано за замовчуванням */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Коли меню активне */
+.mobile-menu-overlay.is-open {
+  display: block;
+  opacity: 1;
+}
+
+/* Контейнер для центрування */
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Лого вгорі, посилання в центрі, кнопка внизу */
+  align-items: center;
+  height: 100%;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.mobile-menu-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-size: var(--step-0);
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  font-family: var(--font-main); /* Твій шрифт для заголовків */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color var(--transition-speed) ease;
+}
+.mobile-nav-link:hover {
+  color: var(--color-accent-light);
+  font-size: 1.2rem;
+}
+
+.mobile-cta-btn {
+  width: 280px;
+  display: block;
+}
+
+/* Кнопка Х */
+.menu-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3rem;
+  background: none;
+  border: none;
+  color: var(--color-accent); /* Твій золотий колір */
+  cursor: pointer;
+}
+
+/* =========================================
+   GEOGRAPHY MODULE (geo.css)
+========================================= */
+
+.geography {
+  background-color: var(--color-bg);
+  padding: 6rem 1rem; /* Щедра вертикальна відстань для повітряності */
+}
+
+.geography-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* На телефоні 1 колонка */
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* --- СТИЛІ КАРТКИ --- */
+.geo-card {
+  background-color: var(--color-dark-wood); /* Темний преміальний фон картки */
+  border-radius: 8px 8px 0 0;
+  overflow: hidden; /* Обрізає фото по краях заокруглення */
+  display: flex;
+  flex-direction: column; /* Вибудовуємо контент вертикально */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02); /* Легка тінь для об'єму на світлому фоні */
+  transition: transform var(--transition-speed) ease;
+  padding: 0px;
+}
+.geo-image-wrap {
+  overflow: hidden; /* Забезпечує, що текст не вилазить за межі картки */
+  transition: transform var(--transition-speed) ease;
+}
+.geo-image-wrap img {
+  transition: transform var(--transition-speed) ease;
+}
+
+.geo-card:hover {
+  transform: translateY(-5px); /* Картка злегка піднімається при наведенні */
+}
+.geo-card:hover img {
+  transform: scale(1.05); /* Фото злегка збільшується при наведенні на картку */
+}
+
+/* --- КОНТЕНТ КАРТКИ (Текстова частина) --- */
+.geo-card-content {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Змушує текстовий блок займати весь вільний простір */
+  background-color: var(--color-wood-light);
+  border-radius: 8px 8px 0 0; /* Заокруглення тільки для текстової частини */
+}
+
+/* --- КОНТЕНТ КАРТКИ (Текстова частина) --- */
+.geo-location {
+  color: var(--color-accent-light); /* Золотий колір. Іконка автоматично його успадкує! */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  background-color: var(--color-dark-wood);
+
+  padding: 18px 8px;
+
+  /* Додаємо Flexbox, щоб вирівняти іконку і текст */
+  display: flex;
+  align-items: center; /* Вирівнюємо строго по центру вертикалі */
+  gap: 0.4rem; /* Відстань між іконкою та текстом */
+}
+
+/* Розмір самої іконки */
+.geo-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0; /* Забороняємо іконці стискатися, якщо текст буде довгим */
+}
+
+.geo-title {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: var(--step-2);
+  margin-top: 1rem;
+  line-height: 1.3;
+  padding: 0 20px;
+}
+
+.geo-desc {
+  color: rgba(255, 255, 255, 0.7); /* Напівпрозорий білий для легкого читання */
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 2rem 0;
+  padding: 0 20px;
+}
+
+/* --- ФОТОГРАФІЯ В КАРТЦІ --- */
+.geo-image-wrap {
+  width: 100%;
+  height: 240px; /* Фіксована висота для всіх фотографій у картках */
+  margin-top: auto; /* МАГІЯ: завжди притискає фотографію до самого низу картки! */
+}
+
+.geo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Заповнює блок без спотворень */
+}
+
+/* --- @media ДЛЯ ГЕОГРАФІЇ --- */
+@media screen and (min-width: 768px) {
+  .geography {
+    padding-top: 8rem; /* Щедра вертикальна відстань для повітряності */
+  }
+  .geography-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшеті */
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .geography-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки на великих екранах */
+    gap: 3rem;
+  }
+}
+
+/* =========================================
+   MANUFACTURE MODULE (manufacture.css)
+========================================= */
+.manufacture {
+  padding: 6rem 0;
+}
+.dark-section {
+  background-color: var(--color-dark-wood);
+  color: #ffffff; /* Робимо весь текст білим за замовчуванням */
+}
+
+/* Перевизначаємо колір заголовків для темної секції */
+.dark-section .section-title {
+  color: #ffffff;
+  text-align: left; /* Вирівнюємо по лівому краю */
+  margin-bottom: 2rem;
+}
+
+.section-subtitle {
+  display: block;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.manufacture-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* На телефоні все в одну колонку */
+  gap: 4rem;
+}
+
+/* --- Текстова частина --- */
+.manufacture-text {
+  color: rgba(255, 255, 255, 0.8); /* Напівпрозорий білий для легкого читання */
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.mt-2 {
+  margin-top: 2rem; /* Утиліта для відступу кнопки */
+  display: inline-block;
+}
+
+/* --- Візуальна частина (Композиція фото) --- */
+.manufacture-visuals {
+  position: relative;
+  width: 100%;
+  /* Резервуємо місце, щоб абсолютні елементи не вилізли за межі */
+  padding-bottom: 20%;
+  margin-bottom: 5rem;
+}
+
+.img-main {
+  width: 100%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.img-overlap {
+  position: absolute;
+  bottom: -30%; /* Зсуваємо вниз */
+  right: 0; /* Притискаємо вправо */
+  width: 70%; /* Воно менше за головне */
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-dark-wood); /* Створюємо рамку кольору фону, щоб "розрізати" фотографії */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.experience-badge {
+  position: absolute;
+  top: -50px;
+  left: 20px;
+  background-color: var(--color-accent);
+  color: white;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Робимо круглий бейдж */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.badge-number {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.badge-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.3rem;
+  font-weight: 600;
+}
+
+/* --- @media ДЛЯ ВИРОБНИЦТВА --- */
+@media screen and (min-width: 992px) {
+  .manufacture {
+    padding: 8rem 0 8rem 0;
+  }
+  .manufacture-grid {
+    grid-template-columns: 1fr 1fr; /* 2 рівні колонки на десктопі */
+    align-items: flex-start; /* Центруємо текст відносно фотографій */
+    gap: 6rem;
+  }
+
+  .manufacture-visuals {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .img-main {
+    width: 80%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
+  }
+
+  .img-overlap {
+    position: absolute;
+    bottom: -80%; /* Зсуваємо вниз */
+    right: 0; /* Притискаємо вправо */
+    width: 70%; /* Воно менше за головне */
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-dark-wood); /* Створюємо рамку кольору фону, щоб "розрізати" фотографії */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .experience-badge {
+    top: -50px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* =========================================
+   PROCESS MODULE (HOW WE WORK)
+   process.css
+========================================= */
+.process {
+  background-color: var(--color-bg);
+}
+
+/* --- Базові стилі (Мобільні) --- */
+.process-container {
+  display: flex;
+  flex-direction: column; /* Все в одну колонку на телефоні */
+  gap: 3rem;
+}
+
+.process-sidebar {
+  width: 100%;
+}
+
+.process-intro {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.step-card {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-left: 3px solid var(--color-accent);
+  /* Прибрали ефект hover, щоб він не конфліктував з анімацією прилипання */
+}
+
+.step-number {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  color: #e5e5e5; /* Світло-сірий колір, виглядає як водяний знак */
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.step-title {
+  color: var(--color-text-main);
+  font-family: var(--font-heading);
+  font-size: var(--step-2);
+  margin-bottom: 1rem;
+}
+
+.step-desc {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- @media ДЛЯ ДЕСКТОПУ (МАГІЯ СТАКА КАРТОК) --- */
+@media screen and (min-width: 992px) {
+  .process-container {
+    flex-direction: row; /* Розставляємо 2 колонки поруч */
+    align-items: flex-start; /* ВАЖЛИВО! */
+    gap: 5rem;
+  }
+
+  /* Ліва колонка прилипає до центру */
+  .process-sidebar {
+    width: 40%;
+    position: sticky;
+    top: 25vh;
+  }
+
+  /* Права колонка з картками */
+  .process-steps {
+    width: 60%;
+    gap: 6rem; /* Велика відстань між картками, щоб вони наїжджали плавно */
+  }
+
+  /* Кожна картка стає липкою */
+  .step-card {
+    position: sticky;
+    box-shadow:
+      0 -15px 30px rgba(0, 0, 0, 0.03),
+      0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Створюємо ідеальні "сходинки" для зупинки кожної картки */
+  .step-card:nth-child(1) {
+    top: 120px;
+    z-index: 1;
+  }
+  .step-card:nth-child(2) {
+    top: 150px;
+    z-index: 2;
+  }
+  .step-card:nth-child(3) {
+    top: 180px;
+    z-index: 3;
+  }
+  .step-card:nth-child(4) {
+    top: 210px;
+    z-index: 4;
+  }
+}
+
+/* =========================================
+  CONTACTS MODULE (contacts.css)
+========================================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Мобільна версія: 1 колонка */
+  gap: 4rem;
+}
+
+/* --- Ліва частина: Текст та іконки --- */
+.contact-desc {
+  color: rgba(255, 255, 255, 0.8); /* Злегка приглушений білий текст */
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent); /* Всі іконки автоматично стають золотими */
+  flex-shrink: 0;
+}
+
+/* --- Права частина: Форма --- */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  /* Ефект "Скла": напівпрозорий білий фон на темному дереві */
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Дуже тонка світла рамка */
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background-color: transparent; /* Поля прозорі */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Рамка полів */
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Магія фокусу: коли користувач вводить текст */
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent); /* Рамка стає золотою */
+  background-color: rgba(255, 255, 255, 0.05); /* Поле ледь-ледь світлішає */
+}
+
+.form-textarea {
+  resize: vertical; /* Дозволяє розтягувати поле тільки вниз, не ламаючи дизайн */
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%; /* Кнопка на всю ширину форми */
+  margin-top: 1rem;
+  color: black;
+}
+
+/* --- @media ДЛЯ ДЕСКТОПУ --- */
+@media screen and (min-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr; /* Робимо 2 ідеально рівні колонки */
+    align-items: center; /* Центруємо форму відносно тексту зліва */
+  }
+
+  .contact-form {
+    padding: 3rem; /* Трохи більше "повітря" всередині форми на ПК */
+  }
+}
+
+/* =========================================
+   ФІКС ДЛЯ КНОПОК НА iOS (iPHONE / iPAD)
+========================================= */
+
+.form-submit {
+  -webkit-appearance: none; /* Вимикає системний дизайн Apple */
+  appearance: none; /* Для інших сучасних браузерів */
+
+  /* Додатково жорстко прописуємо кольори, щоб iOS їх не перебив */
+  background-color: white !important;
+  color: var(
+    --color-dark-wood
+  ) !important; /* Або #ffffff, залежно від того, якого кольору текст на кнопці в тебе був */
+  opacity: 1; /* Запобігає напівпрозорості, яку іноді додає iOS */
+  font-size: 1rem;
+}
+
+/* =========================================
+   GALLERY MODULE (portfolio.css)
+========================================= */
+.portfolio {
+  background-color: var(--color-bg-alt);
+}
+
+/* --- Фільтри --- */
+
+/* --- Оновлені Фільтри (Однакова ширина) --- */
+.portfolio-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* На телефоні робимо ідеальні 2 колонки */
+  gap: 1rem;
+  margin-bottom: 3rem;
+  max-width: 400px; /* Обмежуємо загальну ширину на мобільному */
+  margin-left: auto;
+  margin-right: auto; /* Центруємо весь блок по горизонталі */
+}
+
+.filter-btn {
+  width: 100%; /* Кожна кнопка займає рівно 100% своєї половинки */
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-main);
+  padding: 0.8rem 0.5rem; /* Зробили їх трохи вищими для зручного кліку */
+  border-radius: 2px; /* Зробили кути майже прямими, як на твоєму макеті */
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-align: center; /* Центруємо текст всередині кнопки */
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* --- @media для фільтрів (Планшет і Десктоп) --- */
+@media screen and (min-width: 768px) {
+  .portfolio-filters {
+    grid-template-columns: repeat(4, 1fr); /* Вибудовуємо всі 4 кнопки в один рівний ряд */
+    max-width: 800px; /* Дозволяємо блоку розтягнутися */
+  }
+}
+
+/* --- Сітка Галереї --- */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Автоматична адаптивна сітка! */
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
+}
+
+/* Клас для приховування відфільтрованих фото */
+.gallery-card.hide {
+  display: none;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Ефект затемнення і текст при наведенні */
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(43, 30, 22, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-overlay span {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.2rem;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.1);
+}
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+.gallery-item:hover .gallery-overlay span {
+  transform: translateY(0);
+}
+
+/* =========================================
+   МОДАЛЬНЕ ВІКНО (LIGHTBOX)
+========================================= */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none; /* Приховано за замовчуванням */
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.active {
+  display: flex; /* Показуємо, коли JS додає клас active */
+}
+
+.lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.95); /* Темно-сірий фон */
+  cursor: pointer; /* Підказує, що клік закриє вікно */
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  z-index: 10000;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Кнопки управління (Хрестик та Стрілки) */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10001;
+  transition: color 0.3s ease;
+  padding: 1rem;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: #ffffff;
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 30px;
+  font-size: 4rem;
+  line-height: 1;
+}
+.lightbox-prev {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lightbox-next {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Налаштування стрілок для мобільних екранів */
+@media screen and (max-width: 768px) {
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 2rem; /* Робимо стрілки меншими */
+    padding: 0.5rem;
+  }
+  .lightbox-prev {
+    left: 5px;
+  }
+  .lightbox-next {
+    right: 5px;
+  }
+  .lightbox-close {
+    top: 10px;
+    right: 15px;
+    font-size: 3rem;
+  }
+}
+/* =========================================
+   МОДУЛЬ: УНІВЕРСАЛЬНА КАРТКА ГАЛЕРЕЇ
+========================================= */
+.gallery-card {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Займає всю висоту комірки в CSS Grid */
+  cursor: pointer;
+}
+
+/* --- Блок із зображенням --- */
+.gallery-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* або 1/1 для квадратів */
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  background-color: #1a1a1a; /* Заглушка, поки вантажиться фото */
+}
+
+.gallery-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ефект затемнення та іконка плюсика */
+.gallery-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(43, 30, 22, 0.4); /* Напівпрозорий фірмовий колір */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.zoom-icon {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  transform: scale(0.5);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Анімації при наведенні на ВСЮ картку */
+.gallery-card:hover .gallery-thumb {
+  transform: scale(1.08); /* Плавне збільшення фото */
+}
+
+.gallery-card:hover .gallery-hover-overlay {
+  opacity: 1; /* Поява темного фону */
+}
+
+.gallery-card:hover .zoom-icon {
+  transform: scale(1); /* Плюсик вистрибує */
+}
+
+/* --- Блок з текстом --- */
+.gallery-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Притискає низ картки, якщо тексти різної довжини */
+  padding: 0 0.5rem;
+}
+
+.gallery-card-title {
+  color: var(--color-text-main);
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  margin-bottom: 0.5rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.gallery-card-desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  /* Обрізаємо текст, якщо він довший за 3 рядки (опціонально) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery-card:hover .gallery-card-title {
+  color: var(--color-accent); /* Заголовок стає золотим при наведенні на фото */
+}
+
+/* =========================================
+   FOOTER MODULE (footer.css)
+========================================= */
+.site-footer {
+  background-color: var(--color-dark-wood);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 4rem 0 2rem 0; /* Зверху відступ більший, знизу менший */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ледь помітна лінія відділення від попередньої секції */
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 колонка на мобільному */
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* --- Стовпчик 1 --- */
+.footer-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-contacts li {
+  display: flex;
+  flex-direction: column; /* На мобільному лебел над контактом */
+  font-size: 0.95rem;
+}
+
+.contact-label {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+.footer-contacts a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.footer-contacts a:hover {
+  color: var(--color-accent);
+}
+
+/* --- Стовпчик 2 --- */
+.footer-heading {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-address {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Квадратні іконки соцмереж */
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.social-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px; /* Легке заокруглення кутів, щоб не було занадто гостро */
+  color: var(--color-accent); /* Іконка золота */
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.social-square svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Ефект заливки при наведенні */
+.social-square:hover {
+  background-color: var(--color-accent);
+  color: var(--color-dark-wood); /* Іконка стає темною на золотому фоні */
+  transform: translateY(-3px); /* Ледь піднімається */
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* --- Копірайт --- */
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- @media ДЛЯ ДЕСКТОПУ --- */
+@media screen and (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2 колонки */
+    gap: 4rem;
+  }
+
+  .footer-contacts li {
+    flex-direction: row; /* На ПК лейбел і контакт в один рядок */
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-label {
+    margin-bottom: 0;
+    width: 100px; /* Фіксуємо ширину лейблів, щоб текст стояв рівно в стовпчик */
+    flex-shrink: 0;
+  }
+}
+
+/* --- GDPR Документи --- */
+.footer-legal {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.footer-legal a:hover {
+  color: var(--color-accent);
+}
+
+.footer-legal .divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Окрема секція Копірайту --- */
+.footer-copyright {
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  /* Робимо фон трішки темнішим за основний футер, щоб візуально відокремити блок */
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-copyright p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
