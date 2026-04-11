@@ -3,7 +3,7 @@
   margin-bottom: 6rem;
 }
 #reviews .section-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-bottom: 2.5rem;
   text-align: center;
 }
@@ -12,6 +12,9 @@
   position: relative; /* Необхідно для позиціонування стрілочок */
   overflow: hidden; /* Ховаємо скролбар */
   padding: 0 20px; /* Місце для стрілочок з боків */
+}
+.testimonials .section-subtitle {
+  color: var(--color-accent);
 }
 
 .testimonials-track {

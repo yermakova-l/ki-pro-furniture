@@ -24,8 +24,30 @@
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-display: swap;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  src: url('../fonts/inter-regular.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('../fonts/playfair_400_900_latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 /* =========================================
    2. STYLES RESET (reset.css)
 ========================================= */
@@ -177,7 +199,7 @@ body.no-scroll {
 /* Щоб текст ідеально читався, робимо його білим, але даємо золоту рамку */
 .main-nav .btn-outline {
   color: #ffffff;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-accent-light);
   padding: 0.8rem 2.5rem;
   margin-top: 1rem;
   font-size: var(--step-0);
@@ -237,7 +259,7 @@ body.no-scroll {
   }
 
   .nav-link:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-light);
   }
 }
 
@@ -303,7 +325,7 @@ body.no-scroll {
 
 .hero-image-side {
   min-height: 600px;
-  background-image: url('../images/hero.jpeg'); /* Твоє фото команди */
+  background-image: url('../images/hero.jpg'); /* Фото команди */
   background-size: cover;
   background-position: center;
 }
@@ -449,7 +471,7 @@ body.no-scroll {
   font-size: 3rem;
   background: none;
   border: none;
-  color: var(--color-accent); /* Твій золотий колір */
+  color: var(--color-accent-light); /* Твій золотий колір */
   cursor: pointer;
 }
 
@@ -597,7 +619,7 @@ body.no-scroll {
 
 .section-subtitle {
   display: block;
-  color: var(--color-accent);
+  color: var(--color-accent-light);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -638,7 +660,14 @@ body.no-scroll {
   border-radius: var(--border-radius);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
-
+@media screen and (min-width: 600px) and (max-width: 991px) {
+  .img-main {
+    width: 70%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
+  }
+  .img-overlap {
+    width: 60%; /* Воно менше за головне */
+  }
+}
 .img-overlap {
   position: absolute;
   bottom: -30%; /* Зсуваємо вниз */
@@ -737,6 +766,12 @@ body.no-scroll {
 
 .process-sidebar {
   width: 100%;
+}
+.process-sidebar h2 {
+  text-align: left;
+}
+.process-sidebar .section-subtitle {
+  color: var(--color-accent);
 }
 
 .process-intro {
@@ -866,7 +901,7 @@ body.no-scroll {
 .contact-icon {
   width: 24px;
   height: 24px;
-  color: var(--color-accent); /* Всі іконки автоматично стають золотими */
+  color: var(--color-accent-light); /* Всі іконки автоматично стають золотими */
   flex-shrink: 0;
 }
 
@@ -1299,7 +1334,7 @@ body.no-scroll {
 }
 
 .contact-label {
-  color: var(--color-accent);
+  color: var(--color-accent-light);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1343,9 +1378,9 @@ body.no-scroll {
   justify-content: center;
   width: 42px;
   height: 42px;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-accent-light);
   border-radius: 4px; /* Легке заокруглення кутів, щоб не було занадто гостро */
-  color: var(--color-accent); /* Іконка золота */
+  color: var(--color-accent-light); /* Іконка золота */
   background-color: transparent;
   transition: all 0.3s ease;
 }

@@ -4,6 +4,9 @@
 .portfolio {
   background-color: var(--color-bg-alt);
 }
+#portfolio h2 {
+  font-size: 30px;
+}
 
 /* --- Фільтри --- */
 
