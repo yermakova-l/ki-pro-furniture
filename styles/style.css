@@ -2,13 +2,186 @@
    ГОЛОВНИЙ ФАЙЛ СТИЛІВ (style.css)
 ========================================= */
 
-/* 1. Імпорт модулів (порядок має значення!) */
+/* =========================================
+   ФАЙЛ: styles/variables.css
+========================================= */
+:root {
+  /* --- ПРЕМІАЛЬНА КОЛІРНА ПАЛІТРА --- */
 
-@import url('./variables.css'); /* Потім змінні */
-@import url('./base.css'); /* Потім базові стилі */
-@import url('./components.css'); /* Потім компоненти */
-@import url('./testimonials.css'); /* Потім відгуки */
-@import url('./whatsapp.css'); /* Плаваюча кнопка для WhatsApp */
+  /* Фон сайту: теплий, злегка кремовий (Alabaster/Ivory), виглядає шляхетно */
+  --color-bg: #faf9f6;
+  --color-bg-alt: #f3efea; /* Трохи темніший для виділення блоків */
+
+  /* Текст: не чисто чорний, а колір дуже темного дерева або вугілля */
+  --color-text-main: #2c2825;
+  --color-text-muted: #5c554d;
+  --color-text-section-title: #383838; /* Темний, але теплий для заголовків секцій */
+
+  /* Акценти: Золото / Бронза (для кнопок та іконок) */
+  --color-accent: #b8860b; /* Dark Goldenrod */
+  --color-accent-hover: #997009;
+  --color-accent-light: #d4af37;
+  --color-accent-light-hover: #635d58; /* Світліший акцент для кнопок при наведенні */
+
+  /* Темне дерево (для футера або темних секцій) */
+  /*--color-dark-wood: #2b1e16;*/
+  /*--color-dark-wood: #302128;*/
+  --color-dark-wood: #282827; /* Ще темніше, але не чорне, щоб зберегти теплоту */
+  --color-wood-light: #514c48; /* Трохи світліше, щоб не було надто важко */
+
+  /* --- ШРИФТИ --- */
+  --font-heading: 'Playfair Display', serif; /* Для преміальних заголовків */
+  --font-main: 'Inter', sans-serif; /* Для читабельного тексту */
+  --font-hero-heading: 'Gravitas One', sans-serif; /* Для головного екрану - сучасний і стильний */
+
+  /* --- ТИПОГРАФІКА --- */
+  --step-0: 1rem; /* 16px */
+  --step-1: 1.125rem; /* 18px */
+  --step-2: 1.5rem; /* 24px */
+  --step-3: 2rem; /* 32px (h2) */
+  --step-4: 3rem; /* 48px (h1 - Головний екран) */
+
+  /* --- ІНШЕ --- */
+  --border-radius: 5px; /* Маленьке заокруглення для елегантності */
+  --transition-speed: 0.5s;
+  --container-width: 1200px; /* Максимальна ширина контенту */
+
+  --header-height: 90px;
+  --color-overlay: rgba(20, 15, 10, 0.75); /* Темно-коричневе/чорне затемнення для фото */
+}
+
+/* =========================================
+   3. БАЗОВІ СТИЛІ (ЗАСТОСУВАННЯ ЗМІННИХ)
+      base.css
+========================================= */
+body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased; /* Робить шрифти тоншими і чіткішими на Mac */
+}
+
+/* Контейнер, який тримає контент по центру і не дає йому розтягуватися на супер-широких екранах */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Налаштування заголовків */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--step-4);
+  margin-bottom: 2.5rem;
+}
+h2 {
+  font-size: var(--step-3);
+  margin-bottom: 2rem;
+}
+h3 {
+  font-size: var(--step-2);
+  margin-bottom: 1rem;
+}
+h4 {
+  font-size: var(--step-1);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Зображення ніколи не вилазять за межі блоку */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================
+   4. БАЗОВІ ЕЛЕМЕНТИ (КНОПКИ, ПОСИЛАННЯ)
+========================================= */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+.btn-primary {
+  display: inline-block;
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-family: var(--font-main);
+  font-weight: 400;
+  min-width: 140px;
+  border: 1px solid var(--color-accent-light);
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-light-hover);
+  color: #ffffff;
+  border-color: white;
+}
+
+/* =========================================
+   ЗАГАЛЬНІ УТИЛІТИ ДЛЯ СЕКЦІЙ
+========================================= */
+.section-padding {
+  padding: 6rem 0; /* Базовий відступ для мобільних */
+}
+
+@media screen and (min-width: 992px) {
+  .section-padding {
+    padding: 8rem 0; /* Великі "дорогі" відступи на десктопі */
+  }
+  .section-title {
+    font-size: 70px;
+  }
+}
+
+.section-title {
+  font-size: var(--step-3);
+  font-family: var(--font-hero-heading);
+  color: var(--color-wood-light);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.section-description {
+  font-size: var(--step-1);
+  color: var(--color-text-muted);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 450px) {
+  .section-title {
+    font-size: var(--step-2);
+  }
+}
 
 /* =========================================
    1. FONTS (fonts.css)
@@ -76,6 +249,642 @@ dd {
 /* Плавна прокрутка для якорів на лендінгах */
 html {
   scroll-behavior: smooth;
+}
+
+/* -------------------------------------------- 
+          Відгуки клієнтів
+---------------------------------------------*/
+
+#reviews {
+  padding-top: 6rem;
+  margin-bottom: 6rem;
+}
+#reviews .section-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+/* --- Загальні стилі для контейнера та треку --- */
+.testimonials-wrapper {
+  position: relative; /* Необхідно для позиціонування стрілочок */
+  overflow: hidden; /* Ховаємо скролбар */
+  padding: 0 20px; /* Місце для стрілочок з боків */
+}
+.testimonials .section-subtitle {
+  color: var(--color-accent);
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 20px;
+  /*transition: transform 0.3s ease; /* Для плавної прокрутки */
+  /* Ці властивості необхідні, якщо прокрутка буде робитись через JS */
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+}
+.testimonials-track::-webkit-scrollbar {
+  display: none; /* Ховаємо скролбар для Chrome/Safari */
+}
+
+.testimonial-card {
+  flex: 0 0 100%; /* Мобільна версія */
+  /* scroll-snap-align: start; */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+@media (min-width: 992px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 14px); /* Три на десктопі */
+  }
+}
+
+/* --- 3. ЗМІНА: Значок YouTube вліво і вниз --- */
+.project-media {
+  position: relative;
+  height: 200px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden; /* Щоб анімація пульсації не виходила за межі */
+}
+
+.video-play-btn {
+  position: absolute;
+  /* Значок YouTube: вліво і вниз */
+  right: 35px;
+  bottom: 25px; /* Залиште трохи відступу, якщо хочете бачити його на фото */
+  z-index: 100;
+
+  /* АБО, щоб половина була на фото, половина - нижче, треба змінити структуру HTML і CSS */
+  /* bottom: -20px;
+  z-index: 10;
+  overflow: visible !important; */
+
+  width: 50px;
+  height: 50px;
+  background-color: #ff4800;
+  border-radius: 50%; /* Робимо його круглим */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  /* Анімація пульсації */
+  animation: youtube-pulse 2s infinite;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
+}
+
+.video-play-btn::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 14px; /* Трохи менший трикутник */
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 3px;
+}
+
+/* Ефект пульсації для круглої кнопки */
+@keyframes youtube-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.5);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 0, 0, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    transform: scale(1);
+  }
+}
+
+/* --- 1 & 2 ЗМІНИ: Товсті круглі жовті лапки, збільшений відступ --- */
+.testimonial-content {
+  padding: 30px 25px 25px; /* Збільшений відступ зверху */
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+}
+
+.review-text {
+  position: relative;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  margin-top: 15px; /* Збільшений відступ знизу від лапок */
+}
+
+/* Товсті, круглі жовті лапки */
+.review-text::before {
+  content: '“';
+  font-family: var(--font-hero-heading); /* Цей шрифт дає гарні круглі лапки */
+  font-weight: bold; /* Товсті */
+  font-size: 8rem;
+  color: #ca9d09; /* Акцентний жовтий колір */
+  line-height: 1;
+  position: absolute;
+  top: -60px; /* Вище тексту */
+  left: -5px;
+  display: block;
+}
+
+.client-info h4 {
+  margin: 0;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.project-location {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* --- 4. ЗМІНА: Стрілочки прокручування на десктопі --- */
+
+/* Ховаємо стрілочки на мобільних пристроях */
+@media (max-width: 991px) {
+  .nav-btn {
+    display: none;
+  }
+}
+
+/* --- ДЕКСТОП: 3 картки в ряд --- */
+@media (min-width: 992px) {
+  .testimonial-card {
+    flex: 0 0 calc(33.333% - 14px); /* По 3 в ряд */
+  }
+}
+
+/* Модальне вікно має бути ПОВЕРХ усього */
+.modal {
+  display: none;
+  position: fixed; /* Обов'язково fixed */
+  z-index: 9999; /* Максимальний пріоритет */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center; /* Центрування по вертикалі */
+  justify-content: center; /* Центрування по горизонталі */
+}
+
+/* Коли модалка відкрита, показуємо її як flex */
+.modal.active {
+  display: flex !important;
+}
+
+/* Стрілки прокрутки */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer !important;
+  z-index: 100 !important;
+  border: none;
+  font-size: 1.2rem;
+  color: #333;
+  pointer-events: auto !important; /* Дозволяємо кліки */
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px; /* Збільшуємо ширину відео */
+  background: #000;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* Співвідношення 16:9 */
+  height: 0;
+  background: #000;
+}
+/* Спеціальний клас для вертикального відео (9:16) */
+.video-container.vertical {
+  padding-bottom: 177.77%; /* Формат 9:16 для мобільного */
+  max-width: 400px; /* Обмежуємо ширину, щоб не було занадто великим на десктопі */
+  margin: 0 auto;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.close-modal {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+}
+/* -------------------------------------------- 
+          Портфоліо - Лайтбокс
+---------------------------------------------*/
+/* =========================================
+   МОДУЛЬ: ГАЛЕРЕЯ ТА ФІЛЬТРИ
+========================================= */
+.portfolio {
+  background-color: var(--color-bg-alt);
+}
+#portfolio h2 {
+  font-size: 30px;
+}
+
+/* --- Фільтри --- */
+
+/* --- Оновлені Фільтри (Однакова ширина) --- */
+.portfolio-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* На телефоні робимо ідеальні 2 колонки */
+  gap: 1rem;
+  margin-bottom: 3rem;
+  max-width: 400px; /* Обмежуємо загальну ширину на мобільному */
+  margin-left: auto;
+  margin-right: auto; /* Центруємо весь блок по горизонталі */
+}
+
+.filter-btn {
+  width: 100%; /* Кожна кнопка займає рівно 100% своєї половинки */
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-main);
+  padding: 0.8rem 0.5rem; /* Зробили їх трохи вищими для зручного кліку */
+  border-radius: 2px; /* Зробили кути майже прямими, як на твоєму макеті */
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-align: center; /* Центруємо текст всередині кнопки */
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* --- @media для фільтрів (Планшет і Десктоп) --- */
+@media screen and (min-width: 768px) {
+  .portfolio-filters {
+    grid-template-columns: repeat(4, 1fr); /* Вибудовуємо всі 4 кнопки в один рівний ряд */
+    max-width: 800px; /* Дозволяємо блоку розтягнутися */
+  }
+}
+
+/* --- Сітка Галереї --- */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Автоматична адаптивна сітка! */
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition:
+    transform 0.4s ease,
+    opacity 0.4s ease;
+}
+
+/* Клас для приховування відфільтрованих фото */
+.gallery-card.hide {
+  display: none;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Ефект затемнення і текст при наведенні */
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(43, 30, 22, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-overlay span {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.2rem;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.1);
+}
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+.gallery-item:hover .gallery-overlay span {
+  transform: translateY(0);
+}
+
+/* =========================================
+   МОДАЛЬНЕ ВІКНО (LIGHTBOX)
+========================================= */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none; /* Приховано за замовчуванням */
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.active {
+  display: flex; /* Показуємо, коли JS додає клас active */
+}
+
+.lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.95); /* Темно-сірий фон */
+  cursor: pointer; /* Підказує, що клік закриє вікно */
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 85vh;
+  z-index: 10000;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Кнопки управління (Хрестик та Стрілки) */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10001;
+  transition: color 0.3s ease;
+  padding: 1rem;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: #ffffff;
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 30px;
+  font-size: 4rem;
+  line-height: 1;
+}
+.lightbox-prev {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lightbox-next {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Налаштування стрілок для мобільних екранів */
+@media screen and (max-width: 768px) {
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 2rem; /* Робимо стрілки меншими */
+    padding: 0.5rem;
+  }
+  .lightbox-prev {
+    left: 5px;
+  }
+  .lightbox-next {
+    right: 5px;
+  }
+  .lightbox-close {
+    top: 10px;
+    right: 15px;
+    font-size: 3rem;
+  }
+}
+/* =========================================
+   МОДУЛЬ: УНІВЕРСАЛЬНА КАРТКА ГАЛЕРЕЇ
+========================================= */
+.gallery-card {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Займає всю висоту комірки в CSS Grid */
+  cursor: pointer;
+}
+
+/* --- Блок із зображенням --- */
+.gallery-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3; /* або 1/1 для квадратів */
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  background-color: #1a1a1a; /* Заглушка, поки вантажиться фото */
+}
+
+.gallery-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ефект затемнення та іконка плюсика */
+.gallery-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(43, 30, 22, 0.4); /* Напівпрозорий фірмовий колір */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.zoom-icon {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  transform: scale(0.5);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Анімації при наведенні на ВСЮ картку */
+.gallery-card:hover .gallery-thumb {
+  transform: scale(1.08); /* Плавне збільшення фото */
+}
+
+.gallery-card:hover .gallery-hover-overlay {
+  opacity: 1; /* Поява темного фону */
+}
+
+.gallery-card:hover .zoom-icon {
+  transform: scale(1); /* Плюсик вистрибує */
+}
+
+/* --- Блок з текстом --- */
+.gallery-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Притискає низ картки, якщо тексти різної довжини */
+  padding: 0 0.5rem;
+}
+
+.gallery-card-title {
+  color: var(--color-text-main);
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  margin-bottom: 0.5rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.gallery-card-desc {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  /* Обрізаємо текст, якщо він довший за 3 рядки (опціонально) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery-card:hover .gallery-card-title {
+  color: var(--color-accent); /* Заголовок стає золотим при наведенні на фото */
+}
+
+/* =========================================
+   МОДУЛЬ: ПЛАВАЮЧА КНОПКА WHATSAPP
+========================================= */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #25d366; /* Фірмовий колір WhatsApp */
+  color: #ffffff; /* Робимо іконку білою */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 9999; /* Щоб кнопка завжди була поверх усіх інших блоків і модалок */
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  /* Додаємо магію: ефект пульсації */
+  animation: pulse-wa 2s infinite;
+}
+
+.whatsapp-icon {
+  width: 35px;
+  height: 35px;
+}
+
+/* Ефекти при наведенні мишкою (зупиняємо пульсацію, кнопка трохи піднімається) */
+.whatsapp-float:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+  color: #ffffff;
+  animation: none; /* Вимикаємо пульсацію при наведенні */
+}
+
+/* Ключові кадри для ефекту пульсації */
+@keyframes pulse-wa {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); /* Тінь розширюється і стає прозорою */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* --- @media ДЛЯ МОБІЛЬНИХ --- */
+@media screen and (max-width: 768px) {
+  .whatsapp-float {
+    width: 55px; /* На телефоні робимо трохи меншою, щоб не закривала текст */
+    height: 55px;
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsapp-icon {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /*=======================================

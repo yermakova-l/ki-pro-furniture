@@ -127,5 +127,5 @@ a:hover {
 @media screen and (max-width: 450px) {
   .section-title {
     font-size: var(--step-2);
-   
   }
+}
