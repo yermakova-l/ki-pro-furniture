@@ -7,7 +7,7 @@
 @import url('./variables.css'); /* Потім змінні */
 @import url('./base.css'); /* Потім базові стилі */
 @import url('./components.css'); /* Потім компоненти */
-@import url('./review.css'); /* Потім відгуки */
+@import url('./testimonials.css'); /* Потім відгуки */
 @import url('./whatsapp.css'); /* Плаваюча кнопка для WhatsApp */
 
 /* =========================================
@@ -1247,8 +1247,11 @@ body.no-scroll {
   margin: 0;
   /* Обрізаємо текст, якщо він довший за 3 рядки (опціонально) */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* Standard Property */
+  line-clamp: 3;
+  /* Fallback for visibility */
   overflow: hidden;
 }
 
