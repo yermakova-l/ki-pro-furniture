@@ -20,6 +20,7 @@
   width: 200px;
   height: auto;
   margin-bottom: 1.5rem;
+  margin-top: -10px; /* Легке підняття логотипу для кращого візуального балансу */
 }
 
 .footer-contacts {
@@ -164,6 +165,23 @@
 
   .director-details {
     padding-top: 2px; /* Мінімальне вирівнювання з текстом лейбла */
+  }
+}
+/* Додаємо стиль для тексту місії */
+.footer-mission {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 280px;
+  margin-top: 1rem;
+}
+
+/* Оновлюємо сітку для десктопу */
+@media screen and (min-width: 1024px) {
+  /* Краще брати від 1024px для трьох колонок */
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr; /* Перша колонка трохи ширша для тексту */
+    gap: 2rem;
   }
 }
 
