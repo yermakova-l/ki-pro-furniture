@@ -1921,6 +1921,41 @@ body.no-scroll {
     flex-shrink: 0;
   }
 }
+/* Додаткові стилі для блоку директора */
+.director-block {
+  margin-top: 0.5rem;
+}
+
+.director-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.director-note {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 0.4rem 0;
+  max-width: 250px; /* Обмежуємо ширину, щоб текст гарно переносився */
+}
+
+.director-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Адаптація для десктопу, щоб підтримати вашу логіку 100px */
+@media screen and (min-width: 768px) {
+  .director-block {
+    align-items: flex-start !important; /* Щоб лейбл був вгорі, а не по центру */
+  }
+
+  .director-details {
+    padding-top: 2px; /* Мінімальне вирівнювання з текстом лейбла */
+  }
+}
 
 /* --- GDPR Документи --- */
 .footer-legal {
