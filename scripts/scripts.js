@@ -217,8 +217,72 @@ const initTestimonials = () => {
   }
 };
 
+/* ========================================
+    Send form data to w3form 
+=========================================*/
+
+const initContactForm = () => {
+  const contactForm = document.getElementById('contactForm');
+  if (!contactForm) return;
+
+  // Створюємо Toast у DOM при ініціалізації
+  if (!document.querySelector('.toast')) {
+    const toastHTML = `
+            <div id="toast" class="toast">
+                <div class="toast-icon-box">✓</div>
+                <div class="toast-content">
+                    <span class="toast-title">Success!</span>
+                    <span class="toast-message">Your message has been sent.</span>
+                </div>
+            </div>`;
+    document.body.insertAdjacentHTML('beforeend', toastHTML);
+  }
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const btn = contactForm.querySelector('.form-submit');
+    const toast = document.getElementById('toast');
+    const formData = new FormData(contactForm);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    // Стан завантаження
+    const originalBtnText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: json,
+    })
+      .then(async response => {
+        if (response.status == 200) {
+          toast.classList.add('show');
+          contactForm.reset();
+          setTimeout(() => toast.classList.remove('show'), 5000);
+        } else {
+          alert('Error: Something went wrong.');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Submission failed. Check your connection.');
+      })
+      .finally(() => {
+        btn.textContent = originalBtnText;
+        btn.disabled = false;
+      });
+  });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initGallery();
   initTestimonials();
+  initContactForm();
 });

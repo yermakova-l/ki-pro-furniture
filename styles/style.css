@@ -1789,6 +1789,72 @@ body.no-scroll {
   font-size: 1rem;
 }
 
+/* Стилізація чекбокса */
+
+.form-privacy {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.privacy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.privacy-checkbox {
+  accent-color: var(--color-accent); /* Робимо галочку золотою */
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.privacy-text a {
+  color: var(--color-accent-light);
+  text-decoration: underline;
+  transition: opacity 0.3s;
+}
+
+.privacy-text a:hover {
+  opacity: 0.8;
+}
+
+/* --- СТИЛІ ДЛЯ TOAST --- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px); /* Ефект скла, як у форми */
+  border: 1px solid var(--color-accent);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-icon {
+  color: var(--color-accent);
+  font-size: 1.2rem;
+}
+
 /* =========================================
    FOOTER MODULE (footer.css)
 ========================================= */

@@ -481,12 +481,27 @@
             </div>
 
             <div class="contact-form-wrapper">
-              <form id="lead-form" class="contact-form">
+              <form
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                id="contactForm"
+                class="contact-form"
+              >
                 <input
                   type="hidden"
                   name="access_key"
-                  value="8412fed3-99cc-4eb1-887c-c8179b09ebc3"
+                  value="ed45c335-a9b0-4072-95c0-024f37af4652"
                 />
+                <input
+                  type="hidden"
+                  name="subject"
+                  value="New Bespoke Inquiry from Ki-Pro Website Form"
+                />
+
+                <input type="hidden" name="cc" value="lyudmyla.yermakova@gmail.com" />
+
+                <input type="hidden" name="from_name" value="Ki-Pro Website Contact Form" />
+
                 <div class="form-group">
                   <input
                     type="text"
@@ -526,6 +541,21 @@
                     required
                   ></textarea>
                 </div>
+                <div class="form-privacy">
+                  <label class="privacy-label">
+                    <input
+                      type="checkbox"
+                      name="privacy_consent"
+                      required
+                      class="privacy-checkbox"
+                    />
+                    <span class="privacy-text">
+                      I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and
+                      consent to the processing of my data.
+                    </span>
+                  </label>
+                </div>
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none" />
                 <button type="submit" class="btn-primary form-submit">Send Message</button>
               </form>
             </div>
