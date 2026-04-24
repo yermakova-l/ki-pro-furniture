@@ -1134,7 +1134,7 @@ body.no-scroll {
 
 .hero-image-side {
   min-height: 600px;
-  background-image: url('../images/hero.jpg'); /* Фото команди */
+  background-image: url('../images/hero_.jpg'); /* Фото команди */
   background-size: cover;
   background-position: center;
 }
