@@ -1464,6 +1464,18 @@ body.no-scroll {
   margin-bottom: 5rem;
 }
 
+.manufacture-visuals .video-play-btn {
+  position: absolute;
+  top: 80% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 3;
+  width: 80px;
+  height: 80px;
+}
+
 .img-main {
   width: 100%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
   border-radius: var(--border-radius);
