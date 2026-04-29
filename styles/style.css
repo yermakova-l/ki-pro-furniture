@@ -1442,6 +1442,14 @@ body.no-scroll {
   gap: 4rem;
 }
 
+.manufacture-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 550px;
+  gap: 1.5rem; /* Відстань між текстом і фотографіями */
+}
+
 /* --- Текстова частина --- */
 .manufacture-text {
   color: rgba(255, 255, 255, 0.8); /* Напівпрозорий білий для легкого читання */
@@ -1459,35 +1467,28 @@ body.no-scroll {
 .manufacture-visuals {
   position: relative;
   width: 100%;
-  /* Резервуємо місце, щоб абсолютні елементи не вилізли за межі */
-  padding-bottom: 20%;
-  margin-bottom: 5rem;
 }
 
 .manufacture-visuals .video-play-btn {
   position: absolute;
-  top: 80% !important;
-  left: 50% !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: translate(-50%, -50%) !important;
+  top: 40%;
+  left: 40%;
+  /* right: auto;
+  bottom: auto; */
+  /*transform: translate(-50%, -50%) !important;*/
   z-index: 3;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
 
 .img-main {
-  width: 100%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   border-radius: var(--border-radius);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 @media screen and (min-width: 600px) and (max-width: 991px) {
-  .img-main {
-    width: 70%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
-  }
-  .img-overlap {
-    width: 60%; /* Воно менше за головне */
-  }
 }
 .img-overlap {
   position: absolute;
@@ -1549,18 +1550,20 @@ body.no-scroll {
   }
 
   .img-main {
-    width: 80%; /* Велике фото не на всю ширину, залишаємо місце для меншого */
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
-  .img-overlap {
+  /* .img-overlap {
     position: absolute;
-    bottom: -80%; /* Зсуваємо вниз */
-    right: 0; /* Притискаємо вправо */
-    width: 70%; /* Воно менше за головне */
+    bottom: -80%;
+    right: 0; 
+    width: 70%; 
     border-radius: var(--border-radius);
-    border: 1px solid var(--color-dark-wood); /* Створюємо рамку кольору фону, щоб "розрізати" фотографії */
+    border: 1px solid var(--color-dark-wood);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
+  }  */
 
   .experience-badge {
     top: -50px;
