@@ -907,7 +907,7 @@ body:has(.modal.active) {
   margin-left: -20px;
 }
 .logo-img-large {
-  width: 200px;
+  width: 250px;
   height: auto;
   margin-bottom: 1rem;
 }
