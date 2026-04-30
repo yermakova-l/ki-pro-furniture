@@ -421,6 +421,10 @@ html {
 }
 
 /* Модальне вікно має бути ПОВЕРХ усього */
+body:has(.modal.active) {
+  overflow: hidden;
+}
+
 .modal {
   display: none;
   position: fixed; /* Обов'язково fixed */
@@ -476,6 +480,9 @@ html {
   border-radius: 8px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
+.modal-content:has(.video-container.vertical) {
+  max-width: 400px;
+}
 
 .video-container {
   position: relative;
@@ -504,7 +511,9 @@ html {
   right: 0;
   color: #fff;
   font-size: 40px;
+  line-height: 1;
   cursor: pointer;
+  z-index: 1000;
 }
 /* -------------------------------------------- 
           Портфоліо - Лайтбокс
