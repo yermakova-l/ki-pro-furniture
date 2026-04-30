@@ -380,18 +380,18 @@ html {
 }
 
 /* Товсті, круглі жовті лапки */
-.review-text::before {
+/*.review-text::before {
   content: '“';
-  font-family: var(--font-hero-heading); /* Цей шрифт дає гарні круглі лапки */
-  font-weight: bold; /* Товсті */
+  font-family: var(--font-hero-heading); 
+  font-weight: bold; 
   font-size: 8rem;
-  color: #ca9d09; /* Акцентний жовтий колір */
+  color: #ca9d09; 
   line-height: 1;
   position: absolute;
-  top: -60px; /* Вище тексту */
+  top: -60px; 
   left: -5px;
   display: block;
-}
+}*/
 
 .client-info h4 {
   margin: 0;
