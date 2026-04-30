@@ -903,8 +903,11 @@ body:has(.modal.active) {
 /* =========================================
    ЛОГОТИП ТА АНІМАЦІЇ
 ========================================= */
+.hero-block-logo {
+  margin-left: -20px;
+}
 .logo-img-large {
-  width: 150px; /* Великий розмір для мобільних */
+  width: 200px;
   height: auto;
   margin-bottom: 1rem;
 }
@@ -1107,7 +1110,7 @@ body.no-scroll {
 
 /* 2. Блок Логотипа */
 .logo-img-large {
-  width: 160px; /* Великий логотип для телефону */
+  width: 200px; /* Великий логотип для телефону */
   height: auto;
   /* filter: invert(1) contrast(1.2);
   mix-blend-mode: screen;*/
@@ -1250,7 +1253,7 @@ body.no-scroll {
 }
 
 .mobile-menu-logo {
-  width: 140px;
+  width: 200px;
   height: auto;
   margin-bottom: 2rem;
 }
@@ -1901,7 +1904,8 @@ body.no-scroll {
   width: 200px;
   height: auto;
   margin-bottom: 1.5rem;
-  margin-top: -10px; /* Легке підняття логотипу для кращого візуального балансу */
+  margin-top: -10px;
+  margin-left: -20px;
 }
 
 .footer-contacts {
