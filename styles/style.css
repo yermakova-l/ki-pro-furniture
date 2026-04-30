@@ -295,6 +295,7 @@ html {
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
+  max-width: 400px;
 }
 @media (min-width: 992px) {
   .testimonial-card {
