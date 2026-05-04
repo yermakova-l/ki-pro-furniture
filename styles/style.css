@@ -1382,7 +1382,7 @@ body.no-scroll {
 /* --- КОНТЕНТ КАРТКИ (Текстова частина) --- */
 .geo-location {
   color: var(--color-accent-light); /* Золотий колір. Іконка автоматично його успадкує! */
-  font-size: 1rem;
+  font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 1rem;
@@ -1390,11 +1390,12 @@ body.no-scroll {
   background-color: var(--color-dark-wood);
 
   padding: 18px 8px;
+  text-align: center;
 
   /* Додаємо Flexbox, щоб вирівняти іконку і текст */
-  display: flex;
-  align-items: center; /* Вирівнюємо строго по центру вертикалі */
-  gap: 0.4rem; /* Відстань між іконкою та текстом */
+  /*display: flex;
+  align-items: center;
+  gap: 0.4rem;  */
 }
 
 /* Розмір самої іконки */
