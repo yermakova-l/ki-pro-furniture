@@ -475,38 +475,49 @@ body:has(.modal.active) {
 
 .modal-content {
   position: relative;
-  width: 90%;
+  /* width: 90%;
   max-width: 900px; /* Збільшуємо ширину відео */
+  width: auto;
+  max-width: min(90vw, 400px);
   background: #000;
   border-radius: 8px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 .modal-content:has(.video-container.vertical) {
-  max-width: 400px;
+  /*max-width: 400px;*/
+  width: auto;
+  max-width: min(90vw, 400px);
 }
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* Співвідношення 16:9 */
-  height: 0;
+  /* padding-bottom: 56.25%; 
+  height: 0; 
+  width: min(90vw, 400px);
+  height: min(90vh, 711px);*/
+  width: min(90vw, calc(90vh * 9 / 16), 400px);
+  aspect-ratio: 9 / 16;
+  padding-bottom: 0;
   background: #000;
+  overflow: hidden;
 }
 /* Спеціальний клас для вертикального відео (9:16) */
-.video-container.vertical {
-  padding-bottom: 177.77%; /* Формат 9:16 для мобільного */
-  max-width: 400px; /* Обмежуємо ширину, щоб не було занадто великим на десктопі */
+/*.video-container.vertical {
+  padding-bottom: 177.77%;
+  max-width: 400px; 
   margin: 0 auto;
-}
+}*/
 
 .video-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  /*top: 0;
+  left: 0;*/
+  inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.close-modal {
+/*.close-modal {
   position: absolute;
   top: -45px;
   right: 0;
@@ -515,7 +526,26 @@ body:has(.modal.active) {
   line-height: 1;
   cursor: pointer;
   z-index: 1000;
+}*/
+
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 50%;
 }
+
 /* -------------------------------------------- 
           Портфоліо - Лайтбокс
 ---------------------------------------------*/

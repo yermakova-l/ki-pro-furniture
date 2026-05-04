@@ -199,7 +199,7 @@ const initTestimonials = () => {
           } else {
             container.classList.remove('vertical');
           }
-          videoPlayer.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+          videoPlayer.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0`;
         }
       };
     });
