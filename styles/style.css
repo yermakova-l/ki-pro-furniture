@@ -1342,7 +1342,16 @@ body.no-scroll {
   gap: 2rem;
   margin-top: 3rem;
 }
-
+.geo-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0;
+}
+@media screen and (min-width: 480px) {
+  .geo-container {
+    padding: 0 20px;
+  }
+}
 /* --- СТИЛІ КАРТКИ --- */
 .geo-card {
   background-color: var(--color-dark-wood); /* Темний преміальний фон картки */
@@ -1432,7 +1441,7 @@ body.no-scroll {
 .geo-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Заповнює блок без спотворень */
+  object-fit: cover;
 }
 
 /* --- @media ДЛЯ ГЕОГРАФІЇ --- */
